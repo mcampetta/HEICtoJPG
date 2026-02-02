@@ -173,6 +173,10 @@ QSlider::sub-page:horizontal {
     border-radius: 4px;
 }
 
+QSlider#scrub_slider::sub-page:horizontal {
+    background: #05070A;
+}
+
 /* CHECKBOXES */
 QCheckBox {
     color: #D8FDE2;

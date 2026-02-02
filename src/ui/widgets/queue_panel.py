@@ -160,6 +160,7 @@ class QueuePanel(QWidget):
         button_layout.setSpacing(6)
 
         self.clear_completed_button = QPushButton("Clear Completed")
+        self.clear_completed_button.setToolTip("Remove completed batches from the list")
         self.clear_completed_button.clicked.connect(self.clear_completed)
         button_layout.addWidget(self.clear_completed_button)
 

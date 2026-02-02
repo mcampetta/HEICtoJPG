@@ -44,6 +44,7 @@ class SettingsPanel(QWidget):
         self.quality_slider.setTickPosition(QSlider.TickPosition.TicksBelow)
         self.quality_slider.setTickInterval(10)
         self.quality_slider.valueChanged.connect(self.on_quality_changed)
+        self.quality_slider.setToolTip("Adjust JPG quality (0–100)")
         quality_slider_layout.addWidget(self.quality_slider)
 
         self.quality_value_label = QLabel(f"{self.settings.jpg_quality}%")
@@ -68,6 +69,7 @@ class SettingsPanel(QWidget):
         self.delete_source_checkbox.setChecked(self.settings.delete_source_on_success)
         self.delete_source_checkbox.stateChanged.connect(self.on_settings_changed)
         self.delete_source_checkbox.setStyleSheet("font-weight: bold;")
+        self.delete_source_checkbox.setToolTip("Move original HEIC files to Recycle Bin after successful conversion")
         group_layout.addWidget(self.delete_source_checkbox)
 
         # Warning label for delete
@@ -89,6 +91,7 @@ class SettingsPanel(QWidget):
         self.thread_spinbox.setMaximum(64)
         self.thread_spinbox.setValue(self.settings.max_workers)
         self.thread_spinbox.valueChanged.connect(self.on_settings_changed)
+        self.thread_spinbox.setToolTip("Number of worker threads for conversion")
         thread_layout.addWidget(self.thread_spinbox)
 
         thread_layout.addStretch()
@@ -106,6 +109,7 @@ class SettingsPanel(QWidget):
         self.preserve_exif_checkbox = QCheckBox("Preserve EXIF metadata")
         self.preserve_exif_checkbox.setChecked(self.settings.preserve_exif)
         self.preserve_exif_checkbox.stateChanged.connect(self.on_settings_changed)
+        self.preserve_exif_checkbox.setToolTip("Keep camera/date/location metadata in JPGs")
         group_layout.addWidget(self.preserve_exif_checkbox)
 
         # EXIF info
@@ -122,6 +126,7 @@ class SettingsPanel(QWidget):
         self.operator_mode_checkbox.setChecked(self.settings.operator_mode)
         self.operator_mode_checkbox.stateChanged.connect(self.on_operator_mode_changed)
         self.operator_mode_checkbox.setStyleSheet("font-weight: bold; color: #00E676;")
+        self.operator_mode_checkbox.setToolTip("Enable Matrix header and visual effects")
         group_layout.addWidget(self.operator_mode_checkbox)
 
         # Operator Mode info
@@ -137,6 +142,7 @@ class SettingsPanel(QWidget):
         self.context_menu_checkbox = QCheckBox("Enable Explorer right-click for folders")
         self.context_menu_checkbox.setChecked(self.settings.enable_context_menu)
         self.context_menu_checkbox.stateChanged.connect(self.on_context_menu_changed)
+        self.context_menu_checkbox.setToolTip("Add a right-click menu entry for folder conversion")
         group_layout.addWidget(self.context_menu_checkbox)
 
         # Use Custom Output Directory checkbox
@@ -144,6 +150,7 @@ class SettingsPanel(QWidget):
         self.use_custom_output_dir_checkbox.setChecked(self.settings.use_custom_output_dir)
         self.use_custom_output_dir_checkbox.stateChanged.connect(self._on_use_custom_output_dir_changed)
         self.use_custom_output_dir_checkbox.setStyleSheet("font-weight: bold;")
+        self.use_custom_output_dir_checkbox.setToolTip("Send JPGs to a chosen output folder")
         group_layout.addWidget(self.use_custom_output_dir_checkbox)
 
         # Preserve folder structure checkbox (only relevant when custom output is enabled)
@@ -151,6 +158,7 @@ class SettingsPanel(QWidget):
         self.preserve_structure_checkbox.setChecked(self.settings.preserve_folder_structure)
         self.preserve_structure_checkbox.stateChanged.connect(self.on_settings_changed)
         group_layout.addWidget(self.preserve_structure_checkbox)
+        self.preserve_structure_checkbox.setToolTip("Keep subfolders when using a custom output folder")
 
         # Output directory selection row (hidden until enabled)
         self.output_row = QWidget()
@@ -166,10 +174,12 @@ class SettingsPanel(QWidget):
 
         self.browse_button = QPushButton("Browse...")
         self.browse_button.clicked.connect(self.select_output_directory)
+        self.browse_button.setToolTip("Choose output folder")
         output_layout.addWidget(self.browse_button)
 
         self.open_button = QPushButton("Open")
         self.open_button.clicked.connect(self.open_output_directory)
+        self.open_button.setToolTip("Open output folder")
         output_layout.addWidget(self.open_button)
 
         group_layout.addWidget(self.output_row)

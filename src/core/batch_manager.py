@@ -312,6 +312,14 @@ class BatchManager:
 
         return removed_count
 
+    def remove_last_job(self) -> Optional[BatchJob]:
+        """Remove the most recently added job (if any)."""
+        if not self.jobs:
+            return None
+        job = self.jobs.pop()
+        logger.info(f"Removed last batch job: {job.id}")
+        return job
+
     def get_total_stats(self) -> dict:
         """Get aggregated statistics across all jobs."""
         total_files = sum(j.total_files for j in self.jobs)

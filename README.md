@@ -5,7 +5,7 @@
 
 A high-performance, GUI-based batch converter for transforming HEIC images to JPG format. Built for engineers who need to process massive datasets (100k+ images) with speed, reliability, and style.
 
-![Version](https://img.shields.io/badge/version-1.0.0-green.svg)
+![Version](https://img.shields.io/badge/version-1.0--alpha2-green.svg)
 ![Python](https://img.shields.io/badge/python-3.11+-blue.svg)
 ![Platform](https://img.shields.io/badge/platform-Windows-lightgrey.svg)
 ![License](https://img.shields.io/badge/license-Non--Commercial-blue.svg)

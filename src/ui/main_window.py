@@ -237,6 +237,7 @@ class MainWindow(QMainWindow):
         self.start_button.setEnabled(False)
         self.start_button.setIcon(QIcon(str(Path(__file__).parent.parent.parent / "resources" / "icons" / "run.svg")))
         self.start_button.setProperty("iconButton", True)
+        self.start_button.setToolTip("Start converting all queued folders")
         button_layout.addWidget(self.start_button)
 
         self.pause_button = QPushButton("PAUSE")
@@ -245,6 +246,7 @@ class MainWindow(QMainWindow):
         self.pause_button.setEnabled(False)
         self.pause_button.setIcon(QIcon(str(Path(__file__).parent.parent.parent / "resources" / "icons" / "paused.svg")))
         self.pause_button.setProperty("iconButton", True)
+        self.pause_button.setToolTip("Pause or resume conversion")
         button_layout.addWidget(self.pause_button)
 
         self.stop_button = QPushButton("STOP")
@@ -253,6 +255,7 @@ class MainWindow(QMainWindow):
         self.stop_button.setEnabled(False)
         self.stop_button.setIcon(QIcon(str(Path(__file__).parent.parent.parent / "resources" / "icons" / "stop.svg")))
         self.stop_button.setProperty("iconButton", True)
+        self.stop_button.setToolTip("Stop conversion after current tasks finish")
         button_layout.addWidget(self.stop_button)
 
         self.clear_button = QPushButton("CLEAR")
@@ -261,10 +264,12 @@ class MainWindow(QMainWindow):
         self.clear_button.setEnabled(False)
         self.clear_button.setIcon(QIcon(str(Path(__file__).parent.parent.parent / "resources" / "icons" / "trash.svg")))
         self.clear_button.setProperty("iconButton", True)
+        self.clear_button.setToolTip("Remove the most recently added batch")
         button_layout.addWidget(self.clear_button)
 
         self.view_logs_button = QPushButton("View Logs")
         self.view_logs_button.setMinimumHeight(40)
+        self.view_logs_button.setToolTip("Open the logs folder")
         button_layout.addWidget(self.view_logs_button)
 
         button_layout.addStretch()
@@ -275,7 +280,7 @@ class MainWindow(QMainWindow):
         """Connect signals and slots."""
         # Preview panel
         self.preview_panel.folder_to_scan.connect(self.scan_folder)
-        self.preview_panel.clear_requested.connect(self.clear_all)
+        self.preview_panel.clear_requested.connect(self.clear_last_job)
 
         # Settings panel
         self.settings_panel.settings_changed.connect(self.on_settings_changed)
@@ -291,7 +296,7 @@ class MainWindow(QMainWindow):
         self.start_button.clicked.connect(self.start_conversion)
         self.pause_button.clicked.connect(self.toggle_pause)
         self.stop_button.clicked.connect(self.stop_conversion)
-        self.clear_button.clicked.connect(self.clear_all)
+        self.clear_button.clicked.connect(self.clear_last_job)
         self.view_logs_button.clicked.connect(self.view_logs)
         self.toggle_queue_button.clicked.connect(self._toggle_queue_visibility)
         self.toggle_progress_button.clicked.connect(self._toggle_progress_visibility)
@@ -453,13 +458,13 @@ class MainWindow(QMainWindow):
 
         # Update preview panel (limit to 20 for performance with large datasets)
         if scan_result.heic_files:
-            # Load previews asynchronously in background (first 20 only)
-            preview_count = min(20, len(scan_result.heic_files))
-            self.preview_panel.set_files(scan_result.heic_files[:preview_count])
+            # Load full preview list (single-image gallery view)
+            self.preview_panel.set_files(scan_result.heic_files)
 
         # Enable start button
         self.start_button.setEnabled(True)
         self.clear_button.setEnabled(True)
+        self.preview_panel.set_clear_enabled(True)
 
     def on_scan_error(self, job: BatchJob, error: str):
         """Handle scan error."""
@@ -503,6 +508,23 @@ class MainWindow(QMainWindow):
             self.preview_panel.reset()
             self._resize_to_contents()
             self._evaluate_compact_mode()
+        else:
+            self.clear_button.setEnabled(True)
+            self.preview_panel.set_clear_enabled(True)
+
+    def clear_last_job(self):
+        """Clear only the most recently added job."""
+        if self.worker_pool.is_running():
+            return
+        last_job = self.batch_manager.remove_last_job()
+        if last_job:
+            self.queue_panel.remove_job(last_job.id)
+        if len(self.batch_manager.get_queued_jobs()) == 0:
+            self.start_button.setEnabled(False)
+            self.clear_button.setEnabled(False)
+            self.preview_panel.reset()
+        self._resize_to_contents()
+        self._evaluate_compact_mode()
 
 
     def start_conversion(self):
@@ -533,6 +555,7 @@ class MainWindow(QMainWindow):
         self.pause_button.setEnabled(True)
         self.stop_button.setEnabled(True)
         self.clear_button.setEnabled(False)
+        self.preview_panel.set_clear_enabled(False)
         if self._compact_mode:
             self.progress_panel.setVisible(True)
             self.toggle_progress_button.setChecked(True)
@@ -613,6 +636,7 @@ class MainWindow(QMainWindow):
         self.pause_button.setEnabled(False)
         self.stop_button.setEnabled(False)
         self.clear_button.setEnabled(False)
+        self.preview_panel.set_clear_enabled(True)
         self._resize_to_contents()
         self._restore_initial_size()
         self._evaluate_compact_mode()
