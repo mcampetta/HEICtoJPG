@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>HEICtoJPG — Fast HEIC Batch Converter for Windows</title>
+    <meta name="description" content="Convert large HEIC folders to JPG with a fast, responsive Windows GUI. Batch queue, live preview, EXIF preserve, and optional folder structure." />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="bg-grid"></div>
+    <div class="bg-glow"></div>
+
+    <header class="topbar">
+      <div class="brand">
+        <div class="brand-mark">HJ</div>
+        <div class="brand-text">
+          <div class="brand-name">HEICtoJPG</div>
+          <div class="brand-tag">Windows batch converter</div>
+        </div>
+      </div>
+      <nav class="nav">
+        <a href="#features">Features</a>
+        <a href="#download">Download</a>
+        <a href="#faq">FAQ</a>
+      </nav>
+    </header>
+
+    <main class="hero">
+      <div class="hero-copy">
+        <h1>Convert HEIC at scale — fast, reliable, and built for Windows.</h1>
+        <p>
+          Queue massive folders, preserve EXIF, choose output structure, and watch live
+          previews while conversions run in parallel. Multithreaded, batch‑first, and
+          tuned for huge libraries — with an optional right‑click Explorer action to
+          launch a folder straight into conversion.
+        </p>
+        <div class="cta-row" id="download">
+          <a class="btn primary" href="https://github.com/mcampetta/HEICtoJPG/releases/latest/download/HEICtoJPG_Alpha2.exe">
+            Download Alpha 2 (Windows)
+          </a>
+          <a class="btn ghost" href="https://github.com/mcampetta/HEICtoJPG">
+            View on GitHub
+          </a>
+        </div>
+        <div class="note">
+          Non‑commercial source‑available license · Portable single‑file EXE
+        </div>
+      </div>
+
+      <div class="hero-card">
+        <div class="card-header">Live Preview</div>
+        <div class="card-body">
+          <div class="preview-frame">
+            <div class="scanline"></div>
+            <img src="../demo.gif" alt="HEICtoJPG demo" class="demo-gif" />
+            <div class="preview-text">Live conversion demo</div>
+          </div>
+          <div class="card-stats">
+            <div><span>Threads</span><strong>Auto</strong></div>
+            <div><span>EXIF</span><strong>Preserve</strong></div>
+            <div><span>Output</span><strong>Custom</strong></div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <section class="features" id="features">
+      <h2>Built for heavy folders</h2>
+      <div class="feature-grid">
+        <div class="feature">
+          <div class="feature-title">Batch queue</div>
+          <p>Drag multiple folders, pause/resume, and keep converting without reloading.</p>
+        </div>
+        <div class="feature">
+          <div class="feature-title">Live preview</div>
+          <p>See the latest conversion in real time, or hide previews if needed.</p>
+        </div>
+        <div class="feature">
+          <div class="feature-title">Output control</div>
+          <p>Pick a custom output folder and choose to preserve folder structure.</p>
+        </div>
+        <div class="feature">
+          <div class="feature-title">Safe deletes</div>
+          <p>Optional recycle-bin delete only after a successful conversion.</p>
+        </div>
+        <div class="feature">
+          <div class="feature-title">Massive scale</div>
+          <p>Optimized for tens of thousands of images with a responsive UI.</p>
+        </div>
+        <div class="feature">
+          <div class="feature-title">Error resilience</div>
+          <p>Corrupt files never stop the batch — you get a full summary at the end.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="changelog" id="changelog">
+      <h2>Changelog</h2>
+      <div class="changelog-block">
+        <div class="changelog-title">Alpha 2 Build</div>
+        <ul>
+          <li>Smoother preview scrubbing: low‑res thumbnails load while dragging, full‑res loads on release.</li>
+          <li>Corrupt previews no longer stall the preview; they are skipped automatically.</li>
+          <li>Live preview scales to the preview panel for faster, more “real‑time” updates.</li>
+          <li>Hide/Show preview now correctly returns to live view during conversion.</li>
+        </ul>
+      </div>
+      <div class="changelog-block">
+        <div class="changelog-title">Alpha 1 Build — First Release</div>
+        <ul>
+          <li>Batch converts HEIC/HEIF images to JPG on Windows, fast and reliable.</li>
+        </ul>
+        <div class="changelog-subtitle">How it works</div>
+        <ol>
+          <li>Launch the app.</li>
+          <li>Drag‑and‑drop a folder (or click Add Folder) to scan for HEIC files.</li>
+          <li>Choose settings (quality, delete source, custom output folder, preserve folder structure).</li>
+          <li>Click Run Conversion and monitor progress.</li>
+        </ol>
+        <div class="changelog-subtitle">Key features</div>
+        <ul>
+          <li>Multi‑threaded conversion for large folders.</li>
+          <li>Optional custom output directory (preserve or flatten folders).</li>
+          <li>Progress stats (speed, ETA, success/fail).</li>
+          <li>Live preview of latest converted image.</li>
+          <li>Safe delete (moves HEICs to Recycle Bin on success).</li>
+          <li>Optional Explorer right‑click menu for folders.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="faq" id="faq">
+      <h2>Quick FAQ</h2>
+      <div class="faq-grid">
+        <div class="faq-item">
+          <div class="faq-q">Is this free?</div>
+          <div class="faq-a">Yes for personal, educational, and internal non‑commercial use.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q">Does it keep EXIF data?</div>
+          <div class="faq-a">Yes — EXIF preservation is on by default.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q">Does it require install?</div>
+          <div class="faq-a">No. It’s a portable single‑file EXE.</div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <div>HEICtoJPG by Martin Campetta</div>
+      <div>
+        <a href="https://github.com/mcampetta/HEICtoJPG/releases">All Releases</a>
+        <span class="dot">·</span>
+        <a href="https://github.com/mcampetta/HEICtoJPG">Source</a>
+      </div>
+    </footer>
+  </body>
+</html>
