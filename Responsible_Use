@@ -1,0 +1,43 @@
+# Responsible Use Guidelines
+
+HEICtoJPG is designed to provide fast, reliable, and local image format conversion for personal and professional workflows.
+
+This project is intended to remain free and accessible.
+
+## Intended Uses
+
+Examples of appropriate use include:
+
+- Personal photo conversion
+- Educational or classroom use
+- Internal engineering workflows
+- Lab or research environments
+- Personal automation scripts
+
+## Not Intended For
+
+This software is NOT intended to be:
+
+- Resold or repackaged for profit
+- Embedded into paid SaaS products
+- Used as a commercial backend service
+- Monetized without permission
+
+If your use case involves revenue generation or commercial deployment, please obtain a commercial license.
+
+## Security Reminder
+
+Because HEICtoJPG processes image files:
+
+- Do not run untrusted files on sensitive systems
+- Keep dependencies updated
+- Use sandboxing in enterprise environments
+
+## Philosophy
+
+This project follows a simple philosophy:
+
+Free for learning, building, and sharing.
+Not free for resale.
+
+Respecting these guidelines helps keep the tool open and sustainable for everyone.
