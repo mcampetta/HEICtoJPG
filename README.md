@@ -341,7 +341,7 @@ If you encounter issues:
 
 ## License
 
-This project uses the "iOS Backup Manager License" (Non-Commercial Source-Available).
+This project uses the "HEICtoJPG license" (Non-Commercial Source-Available).
 See `LICENSE` for full terms.
 
 ## Credits
